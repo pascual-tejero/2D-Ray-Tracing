@@ -1,6 +1,4 @@
-#include<iostream>
-#include<vector>
-#include<math.h>
+#include <Eigen/Dense>
 #include "helper.h"
 
 bool hit_circle(const Eigen::VectorXd &vray_orig, const Eigen::VectorXd &ray_dir, const Eigen::VectorXd &circle_cent, const double &circle_rad){
