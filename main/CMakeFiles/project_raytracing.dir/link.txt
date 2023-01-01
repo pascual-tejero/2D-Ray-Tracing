@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/project_raytracing.dir/raytracing.cpp.o CMakeFiles/project_raytracing.dir/helper.cpp.o -o project_raytracing  -L/usr/lib/x86_64-linux-gnu  -lSDL2 
