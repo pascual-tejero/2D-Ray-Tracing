@@ -1,7 +1,0 @@
-/home/vagrant/Desktop/Advanced_Programming/Project/local/CMakeFiles/edit_cache.dir
-/home/vagrant/Desktop/Advanced_Programming/Project/local/CMakeFiles/rebuild_cache.dir
-/home/vagrant/Desktop/Advanced_Programming/Project/local/main/CMakeFiles/project_raytracing.dir
-/home/vagrant/Desktop/Advanced_Programming/Project/local/main/CMakeFiles/edit_cache.dir
-/home/vagrant/Desktop/Advanced_Programming/Project/local/main/CMakeFiles/rebuild_cache.dir
-/home/vagrant/Desktop/Advanced_Programming/Project/local/functions/CMakeFiles/edit_cache.dir
-/home/vagrant/Desktop/Advanced_Programming/Project/local/functions/CMakeFiles/rebuild_cache.dir
