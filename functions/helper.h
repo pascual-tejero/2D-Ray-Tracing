@@ -4,16 +4,13 @@
 #include <Eigen/Dense>
 #include "SDL2/SDL.h"
 
-void clear(SDL_Renderer * renderer);
 
-void draw(SDL_Renderer * renderer, SDL_Rect * rect);
-
-class Circle{
-    private:
+class Circle {
+    public:
         const double _radius;
         Eigen::Vector3d _center;
         Eigen::Vector3d _color;
-    public:
+    
         Circle(const double circle_radius, Eigen::Vector3d circle_center, Eigen::Vector3d circle_color);
 
         bool hit_circle(const Eigen::Vector3d &vray_orig, const Eigen::Vector3d &ray_dir, const Eigen::Vector3d &circle_cent, const double &circle_rad);
@@ -30,6 +27,6 @@ class Circle{
 
 };
 
-
+void create_scene(Circle circle, const int &image_width, const int &image_height, SDL_Renderer *renderer);
 
 #endif
