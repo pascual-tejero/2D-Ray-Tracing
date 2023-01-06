@@ -27,6 +27,5 @@ class Circle {
 
 };
 
-void create_scene(Circle circle, const int &image_width, const int &image_height, SDL_Renderer *renderer);
-
+void create_scene(Circle &circle, const int &image_width, const int&image_height, const Eigen::Vector3d &ray_origin, SDL_Renderer *renderer);
 #endif

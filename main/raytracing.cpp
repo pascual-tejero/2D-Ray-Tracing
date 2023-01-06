@@ -35,8 +35,11 @@ int main(int argc, char *argv[]) {
     Eigen::Vector3d color(250, 118, 112);
     Circle circle(0.1, circle_center, color);
 
+    // Ray origin (where the camera is)
+    Eigen::Vector3d ray_origin(0.0, 0.0, 0.0);
+
     // Let's create the scene
-    create_scene(circle, image_width, image_height, renderer);
+    create_scene(circle, image_width, image_height, ray_origin, renderer);
     
     
     int quit = 0;
@@ -47,16 +50,16 @@ int main(int argc, char *argv[]) {
                 // Handle arrow keys
                 switch(event.key.keysym.scancode) {
                     case SDL_SCANCODE_LEFT:
-                        circle._center(0) += 0.1;
+                        ray_origin(0) -= 0.1;
                         break;
                     case SDL_SCANCODE_RIGHT:
-                        circle._center(0) -= 0.1;
+                        ray_origin(0) += 0.1;
                         break;
                     case SDL_SCANCODE_UP:
-                        circle._center(1) += 0.1;
+                        ray_origin(1) -= 0.1;
                         break;
                     case SDL_SCANCODE_DOWN:
-                        circle._center(1) -= 0.1;
+                        ray_origin(1) += 0.1;
                         break;
                     default:
                         break;
@@ -65,7 +68,7 @@ int main(int argc, char *argv[]) {
                 SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
                 SDL_RenderClear(renderer);
 
-                create_scene(circle, image_width, image_height, renderer);
+                create_scene(circle, image_width, image_height, ray_origin, renderer);
 
             } else if (event.type == SDL_QUIT) {
                 quit = 1;

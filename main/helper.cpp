@@ -40,7 +40,7 @@ double Circle::get_color_B() const{
     return _color(2);
 }
 
-void create_scene(Circle circle, const int &image_width, const int&image_height, SDL_Renderer *renderer){
+void create_scene(Circle &circle, const int &image_width, const int&image_height, const Eigen::Vector3d &ray_origin, SDL_Renderer *renderer){
     // Image
     const auto aspect_ratio = 1.0;
 
@@ -50,7 +50,6 @@ void create_scene(Circle circle, const int &image_width, const int&image_height,
 
     // Define some objects for the scene
     Eigen::Vector3d origin(0.0, 0.0, 0.0);
-    Eigen::Vector3d ray_origin(0.0, 0.0, 0.0);
     Eigen::Vector3d focal_length(0.0, 0.0, 1.0);
     Eigen::Vector3d horizontal(viewport_width, 0.0, 0.0);
     Eigen::Vector3d vertical(0.0, viewport_height, 0.0);
