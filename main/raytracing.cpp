@@ -30,24 +30,27 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // Let's define a circle given its center, radius and color
+    // Initialize the circle and camera positions
     Eigen::Vector3d circle_center(0.0, 0.0, 1.0);
     Eigen::Vector3d color(250, 118, 112);
     Circle circle(0.1, circle_center, color);
 
-    // Ray origin (where the camera is)
     Eigen::Vector3d ray_origin(0.0, 0.0, 0.0);
 
-    // Let's create the scene
     create_scene(circle, image_width, image_height, ray_origin, renderer);
-    
-    
+    SDL_RenderPresent(renderer);
+
+    // Set the desired frame rate (e.g. 60 FPS)
+    const int frame_rate = 60;
+    const int frame_time_ms = 1000 / frame_rate;
+
+    // Game loop
     int quit = 0;
     while (!quit) {
+        // Handle user input
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_KEYDOWN) { 
-                // Handle arrow keys
                 switch(event.key.keysym.scancode) {
                     case SDL_SCANCODE_LEFT:
                         ray_origin(0) -= 0.1;
@@ -64,25 +67,37 @@ int main(int argc, char *argv[]) {
                     default:
                         break;
                 }
-                // Update circle position
-                SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-                SDL_RenderClear(renderer);
-
-                create_scene(circle, image_width, image_height, ray_origin, renderer);
-
             } else if (event.type == SDL_QUIT) {
                 quit = 1;
                 puts("QUIT!");
                 break;
             }
         }
-    
-    SDL_RenderPresent(renderer);
+        // update the position of the circle and/or camera, depending on the game logic
+        circle_center(0) += 0.01;
 
+        // Clear the renderer
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+        SDL_RenderClear(renderer);
+
+        // Re-create the scene and render it to the window
+        create_scene(circle, image_width, image_height, ray_origin, renderer);
+        SDL_RenderPresent(renderer);
+
+        // Limit the frame rate by waiting for the desired time
+        SDL_Delay(frame_time_ms);
     }
 
+    // Clean up and exit
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 
+    return 0;
 }
+
+
+
+
+
+
