@@ -11,10 +11,7 @@ We defined a 2D screen and created a small circle. In order to estimate the dist
 
 Addtionallly, the user can adjust the position of the origin of the rays with the arrow keys of the keyboard in such a way that the circle can be moved in four directions.
 
-<div style="display: flex; justify-content: space-between">
-  <img src="https://gitlab.com/advprog2022/40/raytracing/tree/stage2/result1.png" style="width: 49%;">
-  <img src="https://gitlab.com/advprog2022/40/raytracing/tree/stage2/result2.png" style="width: 49%;">
-</div>
+![alt-text-1](img/result1.png "title-1") ![alt-text-2](img/result2.png "title-2")
 
 
 
