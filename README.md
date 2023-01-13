@@ -11,8 +11,11 @@ We defined a 2D screen and created a small circle. In order to estimate the dist
 
 Addtionallly, the user can adjust the position of the origin of the rays with the arrow keys of the keyboard in such a way that the circle can be moved in four directions.
 
-<img src="img/image1.jpg" style="float: left; width: 50%;">
-<img src="img/image2.jpg" style="float: left; width: 50%;">
+<div style="display: flex; justify-content: space-between">
+  <img src="https://gitlab.com/advprog2022/40/raytracing/stage2/result1.png" style="width: 49%;">
+  <img src="https://gitlab.com/advprog2022/40/raytracing/stage2/result2.png" style="width: 49%;">
+</div>
+
 
 ## Run the code ##
 In the folder where you cloned the repository, run the following in the terminal:  
