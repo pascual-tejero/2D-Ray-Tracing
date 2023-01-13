@@ -11,7 +11,8 @@ We defined a 2D screen and created a small circle. In order to estimate the dist
 
 Addtionallly, the user can adjust the position of the origin of the rays with the arrow keys of the keyboard in such a way that the circle can be moved in four directions.
 
-![alt-text-1](img/result1.png "Position of the circle in the center") ![alt-text-2](img/result2.png "Position of the circle on one side ")
+![Position of the circle in the center](img/result1.png)
+![Position of the circle on one side](img/result2.png)
 
 ## Run the code ##
 In the folder where you cloned the repository, run the following in the terminal:  
@@ -21,7 +22,7 @@ In the folder where you cloned the repository, run the following in the terminal
 `./project_raytracing`  
 
 ## References ##
-[1] Shirley, P., Ray Tracing in one weekend series. Edited by S. Hollasch and T.D. Black. Available at https://raytracing.github.io/books/RayTracingInOneWeekend.html
-[2] Eigen. Available at: https://eigen.tuxfamily.org/dox/
-[3] SDL2/Frontpage - SDL Wiki. Available at: https://wiki.libsdl.org/SDL2/FrontPage 
+[1] Shirley, P., Ray Tracing in one weekend series. Edited by S. Hollasch and T.D. Black. Available at https://raytracing.github.io/books/RayTracingInOneWeekend.html  
+[2] Eigen. Available at: https://eigen.tuxfamily.org/dox/  
+[3] SDL2/Frontpage - SDL Wiki. Available at: https://wiki.libsdl.org/SDL2/FrontPage  
  
