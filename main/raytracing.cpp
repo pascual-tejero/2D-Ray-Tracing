@@ -2,6 +2,8 @@
 #include "SDL2/SDL.h"
 #include "helper.h"
 
+// IDEA: to change the FOV we could change the focal distance and/or camera origin. 
+// IDEA: Add another 2D geometric bodies with math equations in 2D to the scene.
 
 int main(int argc, char *argv[]) {
 
@@ -67,7 +69,19 @@ int main(int argc, char *argv[]) {
                     default:
                         break;
                 }
-            } else if (event.type == SDL_QUIT) {
+            }
+
+            else if (event.type == SDL_MOUSEWHEEL){
+                if(event.wheel.y > 0){  // scroll up
+                    ray_origin(2) += 0.1;
+                }
+
+                else{  // scroll down
+                    ray_origin(2) -= 0.1;
+                }  
+            }
+
+            else if (event.type == SDL_QUIT) {
                 quit = 1;
                 puts("QUIT!");
                 break;

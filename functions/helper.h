@@ -5,6 +5,7 @@
 #include "SDL2/SDL.h"
 
 
+// IDEA: create an abstract GeometricBody class from which specific instances like Circle can subclass
 class Circle {
     public:
         const double _radius;
@@ -27,5 +28,7 @@ class Circle {
 
 };
 
+
+Eigen::Vector3d background_color(Eigen::Vector3d& ray);
 void create_scene(Circle &circle, const int &image_width, const int&image_height, const Eigen::Vector3d &ray_origin, SDL_Renderer *renderer);
 #endif

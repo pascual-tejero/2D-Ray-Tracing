@@ -40,6 +40,17 @@ double Circle::get_color_B() const{
     return _color(2);
 }
 
+
+Eigen::Vector3d background_color(Eigen::Vector3d& ray_direction){
+    Eigen::Vector3d white_color(1.0, 1.0, 1.0);
+    Eigen::Vector3d blue_color(0.5, 0.7, 1.0);
+    Eigen::Vector3d unit_direction = ray_direction / ray_direction.norm();
+    auto t = 0.5*(unit_direction(1) + 1.0);
+    // Linear blending of white and blue depending on y coordinate of the ray direction
+    return (1.0-t)*white_color + t*blue_color;
+}
+
+// IDEA: implement the scene as a class containing instances of a circle and a renderer. The scene is responsible for its renderization
 void create_scene(Circle &circle, const int &image_width, const int&image_height, const Eigen::Vector3d &ray_origin, SDL_Renderer *renderer){
     // Image
     const auto aspect_ratio = 1.0;
@@ -66,7 +77,16 @@ void create_scene(Circle &circle, const int &image_width, const int&image_height
                 SDL_SetRenderDrawColor(renderer, circle.get_color_R(), circle.get_color_G(), circle.get_color_B(), 255);
                 SDL_RenderDrawPoint(renderer, i, j);
             }
+            else{
+                Eigen::Vector3d background = background_color(ray_direction);
+                int r = background(0)*255;
+                int g = background(1)*255;
+                int b = background(2)*255;
+                SDL_SetRenderDrawColor(renderer, r, g, b, 255);
+                SDL_RenderDrawPoint(renderer, i, j);
+            }
         }
     }
 }
+
 
