@@ -16,10 +16,10 @@ Addtionallly, the user can adjust the position of the origin of the rays with th
 
 ## Run the code ##
 In the folder where you cloned the repository run the following in the terminal:
-`cmake CMakeLists.txt`
-`cd main`
-`make`
-`./project_raytracing`
+`cmake CMakeLists.txt`  
+`cd main`  
+`make`  
+`./project_raytracing`  
 
 ## References ##
 [1] Shirley, P., Ray Tracing in one weekend series. Edited by S. Hollasch and T.D. Black. Available at https://raytracing.github.io/books/RayTracingInOneWeekend.html
