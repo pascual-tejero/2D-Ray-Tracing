@@ -1,6 +1,6 @@
 # Project: 2D Ray Tracing #
 
-The following project performed as a part of "Advanced Programming" offered by Technical University of Munich (TUM). 
+The following project performed as a part of "Advanced Programming" course offered by Technical University of Munich (TUM) in the winter semester of 2022/2023. 
 
 ## Project Members ##
 1. Balle, Marc
@@ -15,7 +15,7 @@ Addtionallly, the user can adjust the position of the origin of the rays with th
 <img src="img/result2.png" style="display:inline-block;">
 
 ## Run the code ##
-In the folder where you cloned the repository run the following in the terminal:  
+In the folder where you cloned the repository, run the following in the terminal:  
 `cmake CMakeLists.txt`  
 `cd main`  
 `make`  
