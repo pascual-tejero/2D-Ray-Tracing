@@ -11,6 +11,9 @@ We defined a 2D screen and created a small circle. In order to estimate the dist
 
 Addtionallly, the user can adjust the position of the origin of the rays with the arrow keys of the keyboard in such a way that the circle can be moved in four directions.
 
+<img src="img/result1.png" style="display:inline-block;">
+<img src="img/result2.png" style="display:inline-block;">
+
 ## Run the code ##
 In the folder where you cloned the repository run the following in the terminal:
 `cmake CMakeLists.txt`
