@@ -15,7 +15,7 @@ Addtionallly, the user can adjust the position of the origin of the rays with th
 <img src="img/result2.png" style="display:inline-block;">
 
 ## Run the code ##
-In the folder where you cloned the repository run the following in the terminal:
+In the folder where you cloned the repository run the following in the terminal:  
 `cmake CMakeLists.txt`  
 `cd main`  
 `make`  
