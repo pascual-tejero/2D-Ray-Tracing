@@ -7,12 +7,12 @@ The following project performed as a part of "Advanced Programming" course offer
 2. Tejero, Pascual
 
 ## Description ##
-We defined a 2D screen and created a small circle. In order to estimate the distance from the circle to the camera, we first evaluated the intersection of the ray with the circle. If such intersection exists we computed the distance between the point of intersection and the camera, and a red dot is created, otherwise a black dot.
+We defined a 2D screen and created a small circle. In order to estimate the distance from the circle to the camera, we first evaluated the intersection of the ray with the circle. If such intersection exists, we computed the distance between the point of intersection and the camera, and a red dot is created, otherwise a black dot.
 
 Addtionallly, the user can adjust the position of the origin of the rays with the arrow keys of the keyboard in such a way that the circle can be moved in four directions.
 
-<img src="img/result1.png" style="display:inline-block;">
-<img src="img/result2.png" style="display:inline-block;">
+<img src="img/image1.jpg" style="float: left; width: 50%;">
+<img src="img/image2.jpg" style="float: left; width: 50%;">
 
 ## Run the code ##
 In the folder where you cloned the repository, run the following in the terminal:  
