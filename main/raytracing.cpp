@@ -1,6 +1,7 @@
 #include <string>
 #include <fstream>
 #include <chrono>
+#include <vector>
 #include <Eigen/Dense> // Easier for vector multiplication
 #include "SDL2/SDL.h"
 #include "helper.h"
@@ -57,6 +58,7 @@ int main(int argc, char *argv[]) {
     const int frame_rate = 60;
     const int frame_time_ms = 1000 / frame_rate;
     int frame_counter = 0;
+    std::vector<double> time_per_frame;
 
     // Game loop
     int quit = 0;
@@ -116,15 +118,23 @@ int main(int argc, char *argv[]) {
         auto end = std::chrono::system_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
         std::string duration_str = std::to_string(duration.count());
+        time_per_frame.push_back(duration.count());
 
         // Log into file 
         Logger(duration_str, std::to_string(frame_counter));
         frame_counter ++;
-        
+
         // Limit the frame rate by waiting for the desired time
         SDL_Delay(frame_time_ms);
     }
 
+    // Get maximum framerate
+    auto max_time = *std::max_element(time_per_frame.begin(), time_per_frame.end());
+    auto max_fps = 1.0/(max_time*0.001);  // conversion to seconds
+
+    //Log maximum framerate 
+    Logger(std::to_string(max_fps), "Maximum FPS");
+    
     // Clean up and exit
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

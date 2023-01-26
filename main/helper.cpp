@@ -91,11 +91,19 @@ void Scene::create(){
     }
 }
 
+// TODO: save all the output in a buffer object and only write it in the .log file at the very end. 
+// Therefore, we don't open and close the file multiple times. 
 void Logger(std::string msg, std::string frame){
     const std::string filepath = "time_stamp.log";  // run code from base directory
     // c_str() might not be necessary since C++11
     std::ofstream ofs(filepath.c_str(), std::ios_base::out | std::ios_base::app);
-    ofs << "Frame " << frame << ":" << "\t" << msg << '\n';
+    if (frame == "Maximum FPS"){
+        ofs << frame << ":" << "\t" << msg << " fps" <<'\n';
+    }
+    else{
+        ofs << "Frame " << frame << ":" << "\t" << msg << " ms" <<'\n';
+    }
+    
     ofs.close();
 }
 
