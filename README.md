@@ -11,8 +11,10 @@ We defined a 2D screen and created a small circle. In order to estimate the dist
 
 Addtionallly, the user can adjust the position of the origin of the rays with the arrow keys of the keyboard in such a way that the circle can be moved in four directions. By using the scroll on the mouse, the user can zoom-in or zoom-out the scene. 
 
-![alt-text-1](img/result1.png "Position of the circle in the center") 
-![alt-text-2](img/result2.png "Position of the circle on one side ")
+![alt-text-1](img/neutral_pos.png "Position of the circle in the center") 
+![alt-text-2](img/moved_pos.png "Position of the circle on one side ")
+![alt-text-3](img/zoom_in.png "Zoom in into the circle ")
+![alt-text-3](img/zoom_out.png "Zoom out into the circle ")
 
 ## Run the code ##
 In the folder where you cloned the repository, run the following in the terminal:  
