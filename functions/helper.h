@@ -1,6 +1,7 @@
 #ifndef RAY_TRACING_H // include guard
 #define RAY_TRACING_H
 
+#include <string>
 #include <Eigen/Dense>
 #include "SDL2/SDL.h"
 
@@ -61,6 +62,7 @@ class Scene {
 };
 
 
-Eigen::Vector3d background_color(Eigen::Vector3d& ray);
-void create_scene(Circle &circle, const int &image_width, const int&image_height, const Eigen::Vector3d &ray_origin, SDL_Renderer *renderer);
+// TODO: declare as inline if function call is overhead
+void Logger(std::string, std::string);
+
 #endif

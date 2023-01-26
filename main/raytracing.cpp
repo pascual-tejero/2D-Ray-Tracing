@@ -1,3 +1,6 @@
+#include <string>
+#include <fstream>
+#include <chrono>
 #include <Eigen/Dense> // Easier for vector multiplication
 #include "SDL2/SDL.h"
 #include "helper.h"
@@ -53,10 +56,13 @@ int main(int argc, char *argv[]) {
     // Set the desired frame rate (e.g. 60 FPS)
     const int frame_rate = 60;
     const int frame_time_ms = 1000 / frame_rate;
+    int frame_counter = 0;
 
     // Game loop
     int quit = 0;
     while (!quit) {
+        // Start chrono 
+        auto start = std::chrono::system_clock::now();
         // Handle user input
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
@@ -106,6 +112,15 @@ int main(int argc, char *argv[]) {
         scene.create();
         SDL_RenderPresent(renderer);
 
+        // Stop the chrono 
+        auto end = std::chrono::system_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+        std::string duration_str = std::to_string(duration.count());
+
+        // Log into file 
+        Logger(duration_str, std::to_string(frame_counter));
+        frame_counter ++;
+        
         // Limit the frame rate by waiting for the desired time
         SDL_Delay(frame_time_ms);
     }

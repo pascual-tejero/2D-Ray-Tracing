@@ -1,3 +1,4 @@
+#include <fstream>
 #include <Eigen/Dense>
 #include "SDL2/SDL.h"
 #include "helper.h"
@@ -90,5 +91,12 @@ void Scene::create(){
     }
 }
 
+void Logger(std::string msg, std::string frame){
+    const std::string filepath = "time_stamp.log";  // run code from base directory
+    // c_str() might not be necessary since C++11
+    std::ofstream ofs(filepath.c_str(), std::ios_base::out | std::ios_base::app);
+    ofs << "Frame " << frame << ":" << "\t" << msg << '\n';
+    ofs.close();
+}
 
 
