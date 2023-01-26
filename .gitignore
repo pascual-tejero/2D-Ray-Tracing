@@ -6,4 +6,5 @@ CMakeFiles/
 .main/project_raytracing
 .main/Makefile
 .functions/Makefile
+./build
 README.md

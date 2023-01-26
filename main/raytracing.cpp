@@ -11,6 +11,11 @@ int main(int argc, char *argv[]) {
     const auto aspect_ratio = 1.0;
     const unsigned int image_width = 800;
     const unsigned int image_height = static_cast<int>(image_width / aspect_ratio);
+    auto viewport_height = 2.0;
+    auto viewport_width = aspect_ratio * viewport_height;
+
+    Eigen::Vector3d camera_origin(0.0, 0.0, 0.0);
+    Eigen::Vector3d focal_length(0.0, 0.0, 1.0);
 
     // Create SDL window and SDL renderer
     SDL_Window *window;
@@ -37,9 +42,12 @@ int main(int argc, char *argv[]) {
     Eigen::Vector3d color(250, 118, 112);
     Circle circle(0.1, circle_center, color);
 
-    Eigen::Vector3d ray_origin(0.0, 0.0, 0.0);
+    // Create scene
+    Scene scene(aspect_ratio, image_width, image_height, viewport_height, viewport_width, camera_origin, focal_length, circle, renderer);
+    // Eigen::Vector3d ray_origin(0.0, 0.0, 0.0);
 
-    create_scene(circle, image_width, image_height, ray_origin, renderer);
+    // create_scene(circle, image_width, image_height, ray_origin, renderer);
+    scene.create();
     SDL_RenderPresent(renderer);
 
     // Set the desired frame rate (e.g. 60 FPS)
@@ -55,16 +63,16 @@ int main(int argc, char *argv[]) {
             if (event.type == SDL_KEYDOWN) { 
                 switch(event.key.keysym.scancode) {
                     case SDL_SCANCODE_LEFT:
-                        ray_origin(0) -= 0.1;
+                        scene.move_camera_x(-0.1);
                         break;
                     case SDL_SCANCODE_RIGHT:
-                        ray_origin(0) += 0.1;
+                        scene.move_camera_x(0.1);
                         break;
                     case SDL_SCANCODE_UP:
-                        ray_origin(1) -= 0.1;
+                        scene.move_camera_y(-0.1);
                         break;
                     case SDL_SCANCODE_DOWN:
-                        ray_origin(1) += 0.1;
+                        scene.move_camera_y(0.1);
                         break;
                     default:
                         break;
@@ -73,11 +81,10 @@ int main(int argc, char *argv[]) {
 
             else if (event.type == SDL_MOUSEWHEEL){
                 if(event.wheel.y > 0){  // scroll up
-                    ray_origin(2) += 0.1;
-                }
-
-                else{  // scroll down
-                    ray_origin(2) -= 0.1;
+                    scene.move_camera_z(0.1);
+                } 
+                else{
+                    scene.move_camera_z(-0.1);
                 }  
             }
 
@@ -95,7 +102,8 @@ int main(int argc, char *argv[]) {
         SDL_RenderClear(renderer);
 
         // Re-create the scene and render it to the window
-        create_scene(circle, image_width, image_height, ray_origin, renderer);
+        // create_scene(circle, image_width, image_height, ray_origin, renderer);
+        scene.create();
         SDL_RenderPresent(renderer);
 
         // Limit the frame rate by waiting for the desired time

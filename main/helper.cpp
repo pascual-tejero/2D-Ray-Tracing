@@ -4,10 +4,7 @@
 
 
 Circle::Circle(const double circle_radius, Eigen::Vector3d circle_center, Eigen::Vector3d circle_color):
-        _radius(circle_radius) {
-        _center = circle_center; 
-        _color = circle_color;
-}
+        _radius(circle_radius), _center(circle_center), _color(circle_color) {}
 
 
 bool Circle::hit_circle(const Eigen::Vector3d &vray_orig, const Eigen::Vector3d &ray_dir, const Eigen::Vector3d &circle_cent, const double &circle_rad){
@@ -28,20 +25,35 @@ Eigen::Vector3d Circle::get_center() const {
     return _center;
 }
 
-double Circle::get_color_R() const{
-    return _color(0);
+Eigen::Vector3d Circle::get_color() const {
+    return _color;
 }
 
-double Circle::get_color_G() const{
-    return _color(1);
+Scene::Scene(double aspect_ratio, unsigned int image_width, unsigned int image_height, double viewport_height, double viewport_width, 
+             Eigen::Vector3d camera_origin, Eigen::Vector3d focal_length, Circle& c, SDL_Renderer* r): 
+
+             _aspect_ratio(aspect_ratio), _image_width(image_width), _image_height(image_height), _viewport_height(viewport_height), _viewport_width(viewport_width),
+             _camera_origin(camera_origin), _focal_length(focal_length), circle(c), renderer(r)
+{
+
+    Eigen::Vector3d horizontal(_viewport_width, 0.0, 0.0);
+    _horizontal = horizontal;
+
+    Eigen::Vector3d vertical(0.0, _viewport_height, 0.0);
+    _vertical = vertical;
+
+    Eigen::Vector3d lower_left_corner(_camera_origin - _horizontal/2 - _vertical/2 - _focal_length);
+    _lower_left_corner = lower_left_corner;
+
 }
 
-double Circle::get_color_B() const{
-    return _color(2);
-}
+void Scene::move_camera_x(double increment){_camera_origin(0) += increment;}
 
+void Scene::move_camera_y(double increment){_camera_origin(1) += increment;}
 
-Eigen::Vector3d background_color(Eigen::Vector3d& ray_direction){
+void Scene::move_camera_z(double increment){_camera_origin(2) += increment;}
+
+Eigen::Vector3d Scene::background_color(Eigen::Vector3d& ray_direction){
     Eigen::Vector3d white_color(1.0, 1.0, 1.0);
     Eigen::Vector3d blue_color(0.5, 0.7, 1.0);
     Eigen::Vector3d unit_direction = ray_direction / ray_direction.norm();
@@ -50,31 +62,20 @@ Eigen::Vector3d background_color(Eigen::Vector3d& ray_direction){
     return (1.0-t)*white_color + t*blue_color;
 }
 
-// IDEA: implement the scene as a class containing instances of a circle and a renderer. The scene is responsible for its renderization
-void create_scene(Circle &circle, const int &image_width, const int&image_height, const Eigen::Vector3d &ray_origin, SDL_Renderer *renderer){
-    // Image
-    const auto aspect_ratio = 1.0;
+void Scene::create(){
 
-    // Camera
-    auto viewport_height = 2.0;
-    auto viewport_width = aspect_ratio * viewport_height;
+    Eigen::Vector3d ray_origin(0.0, 0.0, 0.0);
 
-    // Define some objects for the scene
-    Eigen::Vector3d origin(0.0, 0.0, 0.0);
-    Eigen::Vector3d focal_length(0.0, 0.0, 1.0);
-    Eigen::Vector3d horizontal(viewport_width, 0.0, 0.0);
-    Eigen::Vector3d vertical(0.0, viewport_height, 0.0);
-    Eigen::Vector3d lower_left_corner(origin - horizontal/2 - vertical/2 - focal_length);
+    for (int j = _image_height-1; j >= 0; --j){
+        for (int i = 0; i < _image_width; ++i) {
+            auto u = double(i) / (_image_width-1);
+            auto v = double(j) / (_image_height-1);
 
-    for (int j = image_height-1; j >= 0; --j){
-        for (int i = 0; i < image_width; ++i) {
-            auto u = double(i) / (image_width-1);
-            auto v = double(j) / (image_height-1);
-
-            Eigen::Vector3d ray_direction(lower_left_corner + u*horizontal + v*vertical - origin);
+            Eigen::Vector3d ray_direction(_lower_left_corner + u*_horizontal + v*_vertical - ray_origin);
             
-            if (circle.hit_circle(ray_origin, ray_direction, circle.get_center(), circle.get_radius())){
-                SDL_SetRenderDrawColor(renderer, circle.get_color_R(), circle.get_color_G(), circle.get_color_B(), 255);
+            if (circle.hit_circle(_camera_origin, ray_direction, circle.get_center(), circle.get_radius())){
+                Eigen::Vector3d circle_color = circle.get_color();
+                SDL_SetRenderDrawColor(renderer, circle_color(0), circle_color(1), circle_color(2), 255);
                 SDL_RenderDrawPoint(renderer, i, j);
             }
             else{
@@ -88,5 +89,6 @@ void create_scene(Circle &circle, const int &image_width, const int&image_height
         }
     }
 }
+
 
 

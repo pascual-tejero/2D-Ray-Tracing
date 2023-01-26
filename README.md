@@ -19,7 +19,10 @@ In the folder where you cloned the repository, run the following in the terminal
 `cmake CMakeLists.txt`  
 `cd main`  
 `make`  
-`./project_raytracing`  
+`./project_raytracing` 
+
+## Prerequisites ##
+In order to compile and run the code, it is necessary to download the SDL2 library into the system. One can simply do that by entering `sudo apt-get install libsdl2-dev` in the terminal. 
 
 ## References ##
 [1] Shirley, P., Ray Tracing in one weekend series. Edited by S. Hollasch and T.D. Black. Available at https://raytracing.github.io/books/RayTracingInOneWeekend.html  
