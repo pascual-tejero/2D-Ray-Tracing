@@ -24,7 +24,9 @@ In the folder where you cloned the repository, run the following in the terminal
 `./project_raytracing` 
 
 ## Prerequisites ##
-In order to compile and run the code, it is necessary to download the SDL2 library into the system. One can simply do that by entering `sudo apt-get install libsdl2-dev` in the terminal. 
+In order to compile and run the code, it is necessary to download the SDL2 and Eigen libraries into the system. One can simply do that by entering in the terminal:  
+`sudo apt-get install libsdl2-dev`  
+`sudo apt install libeigen3-dev`  
 
 ## References ##
 [1] Shirley, P., Ray Tracing in one weekend series. Edited by S. Hollasch and T.D. Black. Available at https://raytracing.github.io/books/RayTracingInOneWeekend.html  
