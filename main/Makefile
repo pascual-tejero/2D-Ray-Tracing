@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(CMAKE_COMMAND) -E cmake_progress_start /home/vagrant/Desktop/Advanced_Programming/Project/raytracing/CMakeFiles /home/vagrant/Desktop/Advanced_Programming/Project/raytracing/functions//CMakeFiles/progress.marks
-	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 functions/all
+	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(CMAKE_COMMAND) -E cmake_progress_start /home/vagrant/Desktop/Advanced_Programming/Project/raytracing/CMakeFiles /home/vagrant/Desktop/Advanced_Programming/Project/raytracing/main//CMakeFiles/progress.marks
+	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/vagrant/Desktop/Advanced_Programming/Project/raytracing/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 functions/clean
+	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,18 +103,80 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 functions/preinstall
+	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 functions/preinstall
+	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
 	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+# Convenience name for target.
+main/CMakeFiles/project_raytracing.dir/rule:
+	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main/CMakeFiles/project_raytracing.dir/rule
+.PHONY : main/CMakeFiles/project_raytracing.dir/rule
+
+# Convenience name for target.
+project_raytracing: main/CMakeFiles/project_raytracing.dir/rule
+.PHONY : project_raytracing
+
+# fast build rule for target.
+project_raytracing/fast:
+	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/project_raytracing.dir/build.make main/CMakeFiles/project_raytracing.dir/build
+.PHONY : project_raytracing/fast
+
+helper.o: helper.cpp.o
+.PHONY : helper.o
+
+# target to build an object file
+helper.cpp.o:
+	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/project_raytracing.dir/build.make main/CMakeFiles/project_raytracing.dir/helper.cpp.o
+.PHONY : helper.cpp.o
+
+helper.i: helper.cpp.i
+.PHONY : helper.i
+
+# target to preprocess a source file
+helper.cpp.i:
+	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/project_raytracing.dir/build.make main/CMakeFiles/project_raytracing.dir/helper.cpp.i
+.PHONY : helper.cpp.i
+
+helper.s: helper.cpp.s
+.PHONY : helper.s
+
+# target to generate assembly for a file
+helper.cpp.s:
+	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/project_raytracing.dir/build.make main/CMakeFiles/project_raytracing.dir/helper.cpp.s
+.PHONY : helper.cpp.s
+
+raytracing.o: raytracing.cpp.o
+.PHONY : raytracing.o
+
+# target to build an object file
+raytracing.cpp.o:
+	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/project_raytracing.dir/build.make main/CMakeFiles/project_raytracing.dir/raytracing.cpp.o
+.PHONY : raytracing.cpp.o
+
+raytracing.i: raytracing.cpp.i
+.PHONY : raytracing.i
+
+# target to preprocess a source file
+raytracing.cpp.i:
+	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/project_raytracing.dir/build.make main/CMakeFiles/project_raytracing.dir/raytracing.cpp.i
+.PHONY : raytracing.cpp.i
+
+raytracing.s: raytracing.cpp.s
+.PHONY : raytracing.s
+
+# target to generate assembly for a file
+raytracing.cpp.s:
+	cd /home/vagrant/Desktop/Advanced_Programming/Project/raytracing && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/project_raytracing.dir/build.make main/CMakeFiles/project_raytracing.dir/raytracing.cpp.s
+.PHONY : raytracing.cpp.s
 
 # Help Target
 help:
@@ -124,6 +186,13 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... project_raytracing"
+	@echo "... helper.o"
+	@echo "... helper.i"
+	@echo "... helper.s"
+	@echo "... raytracing.o"
+	@echo "... raytracing.i"
+	@echo "... raytracing.s"
 .PHONY : help
 
 

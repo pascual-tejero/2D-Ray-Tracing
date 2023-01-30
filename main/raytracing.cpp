@@ -91,6 +91,12 @@ int main(int argc, char *argv[]) {
                     default:
                         break;
                 }
+
+                if (event.key.keysym.sym == SDLK_RETURN) { // press enter
+                    quit = 1;
+                    puts("QUIT!");
+                    break;
+                }
             }
 
             else if (event.type == SDL_MOUSEWHEEL){
