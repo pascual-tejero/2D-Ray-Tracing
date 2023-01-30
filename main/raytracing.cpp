@@ -2,7 +2,7 @@
 #include <fstream>
 #include <chrono>
 #include <vector>
-#include <Eigen/Dense> // Easier for vector multiplication
+#include <Eigen/Dense> // Easier for matrix operations
 #include "SDL2/SDL.h"
 #include "helper.h"
 
@@ -42,23 +42,29 @@ int main(int argc, char *argv[]) {
     }
 
     // Initialize the circle and camera positions
-    Eigen::Vector3d circle_center(0.0, 0.0, 1.0);
-    Eigen::Vector3d color(250, 118, 112);
-    Circle circle(0.1, circle_center, color);
+    Eigen::Vector3d circle1_center(0.0, 0.0, 1.0);
+    Eigen::Vector3d circle1_color(250, 118, 112);
+
+    Eigen::Vector3d circle2_center(0.5, 0.5, 1.0);
+    Eigen::Vector3d circle2_color(255, 128, 0); 
+
+    Circle circle1(0.1, circle1_center, circle1_color, GeometricBodyType::circle);
+    Circle circle2(0.2, circle2_center, circle2_color, GeometricBodyType::circle);    
+
+    std::vector<Circle> circles_scene = {circle1, circle2};
 
     // Create scene
-    Scene scene(aspect_ratio, image_width, image_height, viewport_height, viewport_width, camera_origin, focal_length, circle, renderer);
-    // Eigen::Vector3d ray_origin(0.0, 0.0, 0.0);
+    Scene scene(aspect_ratio, image_width, image_height, viewport_height, viewport_width, camera_origin, focal_length, circles_scene, renderer);
 
-    // create_scene(circle, image_width, image_height, ray_origin, renderer);
     scene.create();
     SDL_RenderPresent(renderer);
 
     // Set the desired frame rate (e.g. 60 FPS)
     const int frame_rate = 60;
     const int frame_time_ms = 1000 / frame_rate;
-    int frame_counter = 0;
+
     std::vector<double> time_per_frame;
+    std::vector<std::string> duration_str;
 
     // Game loop
     int quit = 0;
@@ -103,26 +109,23 @@ int main(int argc, char *argv[]) {
             }
         }
         // update the position of the circle and/or camera, depending on the game logic
-        circle_center(0) += 0.01;
+        circle1_center(0) += 0.01;
+        circle2_center(0) += 0.01;
+
 
         // Clear the renderer
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
         SDL_RenderClear(renderer);
 
         // Re-create the scene and render it to the window
-        // create_scene(circle, image_width, image_height, ray_origin, renderer);
         scene.create();
         SDL_RenderPresent(renderer);
 
         // Stop the chrono 
         auto end = std::chrono::system_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-        std::string duration_str = std::to_string(duration.count());
+        duration_str.push_back(std::to_string(duration.count()));
         time_per_frame.push_back(duration.count());
-
-        // Log into file 
-        Logger(duration_str, std::to_string(frame_counter));
-        frame_counter ++;
 
         // Limit the frame rate by waiting for the desired time
         SDL_Delay(frame_time_ms);
@@ -133,7 +136,7 @@ int main(int argc, char *argv[]) {
     auto max_fps = 1.0/(max_time*0.001);  // conversion to seconds
 
     //Log maximum framerate 
-    Logger(std::to_string(max_fps), "Maximum FPS");
+    Logger(duration_str, std::to_string(max_fps));
     
     // Clean up and exit
     SDL_DestroyRenderer(renderer);

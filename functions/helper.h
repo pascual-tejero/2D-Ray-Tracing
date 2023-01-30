@@ -7,15 +7,24 @@
 
 
 // IDEA: create an abstract GeometricBody class from which specific instances like Circle can subclass
+enum class GeometricBodyType{
+    circle,
+    square,
+    triangle
+
+};
+
 class Circle {
     private:
         const double _radius;
         Eigen::Vector3d _center;
         const Eigen::Vector3d _color;
+        GeometricBodyType _type;
+        
     public:
-        Circle(const double circle_radius, Eigen::Vector3d circle_center, Eigen::Vector3d circle_color);
+        Circle(const double circle_radius, Eigen::Vector3d circle_center, Eigen::Vector3d circle_color, GeometricBodyType type);
 
-        bool hit_circle(const Eigen::Vector3d &vray_orig, const Eigen::Vector3d &ray_dir, const Eigen::Vector3d &circle_cent, const double &circle_rad);
+        bool hit(const Eigen::Vector3d &vray_orig, const Eigen::Vector3d &ray_dir, const Eigen::Vector3d &circle_cent, const double &circle_rad);
 
         const double get_radius() const;
 
@@ -45,11 +54,10 @@ class Scene {
         Eigen::Vector3d _ray_origin;
 
     public:
+        std::vector<Circle> _circles_scene;
+        SDL_Renderer* _renderer;
 
-        Circle& circle;
-        SDL_Renderer* renderer;
-
-        Scene(double, unsigned int, unsigned int, double, double, Eigen::Vector3d, Eigen::Vector3d, Circle&, SDL_Renderer*);
+        Scene(double, unsigned int, unsigned int, double, double, Eigen::Vector3d, Eigen::Vector3d, std::vector<Circle>, SDL_Renderer*);
 
         void move_camera_x(double);
         void move_camera_y(double);
@@ -63,6 +71,6 @@ class Scene {
 
 
 // TODO: declare as inline if function call is overhead
-void Logger(std::string, std::string);
+void Logger(std::vector<std::string> duration_str, std::string max_fps);
 
 #endif
