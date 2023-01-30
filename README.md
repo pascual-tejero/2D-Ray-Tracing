@@ -3,8 +3,8 @@
 The following project performed as a part of "Advanced Programming" course offered by Technical University of Munich (TUM) in the winter semester of 2022/2023. 
 
 ## Project Members ##
-1. Balle, Marc
-2. Tejero, Pascual
+1. Balle Sánchez, Marc
+2. Tejero Cervera, Pascual
 
 ## Description ##
 We defined a 2D screen and created a small circle. In order to estimate the distance from the circle to the camera, we first evaluated the intersection of the ray with the circle. If such intersection exists, we computed the distance between the point of intersection and the camera, and a red dot is created, otherwise a black dot.
@@ -29,7 +29,7 @@ In order to compile and run the code, it is necessary to download the SDL2 and E
 `sudo apt install libeigen3-dev`  
 
 ## References ##
-[1] Shirley, P., Ray Tracing in one weekend series. Edited by S. Hollasch and T.D. Black. Available at https://raytracing.github.io/books/RayTracingInOneWeekend.html  
+[1] Shirley, P., Ray Tracing in one weekend series. Edited by S. Hollasch and T.D. Black. Available at: https://raytracing.github.io/books/RayTracingInOneWeekend.html  
 [2] Eigen. Available at: https://eigen.tuxfamily.org/dox/  
 [3] SDL2/Frontpage - SDL Wiki. Available at: https://wiki.libsdl.org/SDL2/FrontPage  
  
