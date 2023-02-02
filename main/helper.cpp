@@ -4,9 +4,21 @@
 #include "SDL2/SDL.h"
 #include "helper.h"
 
+GeometricBody::GeometricBody(const Eigen::Vector3d& center, const Eigen::Vector3d& color, const GeometricBodyType& type):
+    _center(center), _color(color), _type(type) {}
+
+const Eigen::Vector3d GeometricBody::get_center() const {
+    return _center;
+}
+
+const Eigen::Vector3d GeometricBody::get_color() const {
+    return _color;
+}
+
+GeometricBody::~GeometricBody() {}
 
 Circle::Circle(const double &radius, const Eigen::Vector3d &center, const Eigen::Vector3d &color, const GeometricBodyType &type):
-        _radius(radius), _center(center), _color(color), _type(type) {};
+        GeometricBody(center, color, type), _radius(radius) {};
 
 
 bool Circle::hit(const Eigen::Vector3d &cam_orig, const Eigen::Vector3d &ray_dir) const{
@@ -23,16 +35,8 @@ const double Circle::get_radius() const{
     return _radius;
 }
 
-const Eigen::Vector3d Circle::get_center() const {
-    return _center;
-}
-
-const Eigen::Vector3d Circle::get_color() const {
-    return _color;
-}
-
 Square::Square(const double &side, const Eigen::Vector3d &center, const Eigen::Vector3d &color, const GeometricBodyType &type):
-        _side(side), _center(center), _color(color), _type(type) {};
+        GeometricBody(center, color, type), _side(side) {};
 
 bool Square::hit(const Eigen::Vector3d &cam_orig, const Eigen::Vector3d &ray_dir) const {
     const Eigen::Vector3d ac(cam_orig - ray_dir);
@@ -48,20 +52,12 @@ const double Square::get_side() const{
     return _side;
 }
 
-const Eigen::Vector3d Square::get_center() const {
-    return _center;
-}
-
-const Eigen::Vector3d Square::get_color() const {
-    return _color;
-}
 
 Scene::Scene(const double &aspect_ratio, const unsigned int &image_width, const unsigned int &image_height, const double &viewport_height, 
-             const double &viewport_width, const Eigen::Vector3d &camera_origin, const Eigen::Vector3d &focal_length, const std::array<Circle, 2> &c, 
-             const std::array<Square, 1> &s, SDL_Renderer* r): 
+             const double &viewport_width, const Eigen::Vector3d &camera_origin, const Eigen::Vector3d &focal_length, SDL_Renderer* r): 
 
              _aspect_ratio(aspect_ratio), _image_width(image_width), _image_height(image_height), _viewport_height(viewport_height), 
-             _viewport_width(viewport_width), _camera_origin(camera_origin), _focal_length(focal_length), _circles_scene(c), _squares_scene(s), _renderer(r)
+             _viewport_width(viewport_width), _camera_origin(camera_origin), _focal_length(focal_length), _renderer(r)
 {
 
     const Eigen::Vector3d horizontal(_viewport_width, 0.0, 0.0);
@@ -73,6 +69,29 @@ Scene::Scene(const double &aspect_ratio, const unsigned int &image_width, const 
     const Eigen::Vector3d lower_left_corner(_camera_origin - _horizontal/2 - _vertical/2 - _focal_length);
     _lower_left_corner = lower_left_corner;
 
+    // Initialize the circles
+    const Eigen::Vector3d circle1_center(0.0, 0.0, 1.0);
+    const Eigen::Vector3d circle1_color(250, 118, 112);
+
+    const Eigen::Vector3d circle2_center(0.5, 0.5, 1.0);
+    const Eigen::Vector3d circle2_color(255, 128, 0); 
+
+    // Initialize the squares
+    const Eigen::Vector3d square1_center(-0.5, 0.5, 1.0);
+    const Eigen::Vector3d square1_color(0, 128, 0);
+
+    // Add figures to the objects array that scene will actually use
+    // std::unique_ptr<GeometricBody> circle1 = std::make_unique<Circle>(0.1, circle1_center, circle1_color, GeometricBodyType::circle);
+    // std::unique_ptr<GeometricBody> circle2 = std::make_unique<Circle>(0.2, circle2_center, circle2_color, GeometricBodyType::circle);
+    // std::unique_ptr<GeometricBody> square = std::make_unique<Square>(0.4, square1_center, square1_color, GeometricBodyType::square);
+
+    GeometricBody* c1 = new Circle(0.1, circle1_center, circle1_color, GeometricBodyType::circle);
+    GeometricBody* c2 = new Circle(0.2, circle2_center, circle2_color, GeometricBodyType::circle);
+    GeometricBody* sq = new Square(0.4, square1_center, square1_color, GeometricBodyType::square);
+
+    objects.push_back(c1);
+    objects.push_back(c2);
+    objects.push_back(sq);
 }
 
 void Scene::move_camera_x(const double &increment){_camera_origin(0) += increment;}
@@ -109,23 +128,22 @@ void Scene::create() const{
             SDL_RenderDrawPoint(_renderer, i, j);        
             
             // Draw circles
-            for (auto &circle : _circles_scene) {
-                if (circle.hit(_camera_origin, ray_direction)){
-                    Eigen::Vector3d circle_color = circle.get_color();
-                    SDL_SetRenderDrawColor(_renderer, circle_color(0), circle_color(1), circle_color(2), 255);
-                    SDL_RenderDrawPoint(_renderer, i, j);
-                }
-            }
-
-            // Draw squares
-            for (auto &square : _squares_scene) {
-                if (square.hit(_camera_origin, ray_direction)){
-                    Eigen::Vector3d square_color = square.get_color();
-                    SDL_SetRenderDrawColor(_renderer, square_color(0), square_color(1), square_color(2), 255);
+            for (auto &object : objects) {
+                if (object->hit(_camera_origin, ray_direction)){
+                    // Makes no sense to have get_color() if attributes are protected. We could access them directly. Or we declare the attributes private.
+                    Eigen::Vector3d color = object->get_color();
+                    SDL_SetRenderDrawColor(_renderer, color(0), color(1), color(2), 255);
                     SDL_RenderDrawPoint(_renderer, i, j);
                 }
             }
         }
+    }
+}
+
+
+Scene::~Scene(){
+    for (auto& elem: objects){
+        delete elem;
     }
 }
 

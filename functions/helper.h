@@ -2,7 +2,10 @@
 #define RAY_TRACING_H
 
 #include <string>
+#include <memory>
 #include <Eigen/Dense>
+#include <vector>
+#include <iostream>
 #include "SDL2/SDL.h"
 
 
@@ -15,8 +18,21 @@ enum class GeometricBodyType{
 };
 
 class GeometricBody {
+    protected:
+        Eigen::Vector3d _center;
+        const Eigen::Vector3d _color;
+        const GeometricBodyType _type;
+
     public:
+        GeometricBody(const Eigen::Vector3d&, const Eigen::Vector3d&, const GeometricBodyType&);
+
         virtual bool hit(const Eigen::Vector3d &, const Eigen::Vector3d &) const = 0;
+
+        const Eigen::Vector3d get_center() const;
+
+        const Eigen::Vector3d get_color() const;
+
+        virtual ~GeometricBody();
 
         
 };
@@ -24,9 +40,6 @@ class GeometricBody {
 class Circle : public GeometricBody {
     private:
         const double _radius;
-        Eigen::Vector3d _center;
-        const Eigen::Vector3d _color;
-        const GeometricBodyType _type;
         
     public:
         Circle(const double &, const Eigen::Vector3d &, const Eigen::Vector3d &, const GeometricBodyType &);
@@ -35,18 +48,13 @@ class Circle : public GeometricBody {
 
         const double get_radius() const;
 
-        const Eigen::Vector3d get_center() const;
-
-        const Eigen::Vector3d get_color() const;
+        // ~Circle();
 
 };
 
 class Square : public GeometricBody {
     private:
-        const double _side;
-        Eigen::Vector3d _center;
-        const Eigen::Vector3d _color;
-        const GeometricBodyType _type;  
+        const double _side; 
 
     public:
         Square(const double &, const Eigen::Vector3d &, const Eigen::Vector3d &, const GeometricBodyType &);
@@ -55,9 +63,7 @@ class Square : public GeometricBody {
 
         const double get_side() const;
 
-        const Eigen::Vector3d get_center() const;
-
-        const Eigen::Vector3d get_color() const;
+        // ~Square();
 
 };  
 
@@ -81,12 +87,12 @@ class Scene {
         Eigen::Vector3d _lower_left_corner;
 
     public:
-        std::array<Circle, 2> _circles_scene;
-        std::array<Square, 1> _squares_scene;
+        // std::vector<std::unique_ptr<GeometricBody>> objects;
+        std::vector<GeometricBody*> objects;
         SDL_Renderer* _renderer;
 
         Scene(const double &, const unsigned int &, const unsigned int &, const double &, const double &, const Eigen::Vector3d &, 
-            const Eigen::Vector3d &, const std::array<Circle, 2> &, const std::array<Square, 1> &, SDL_Renderer* r);
+            const Eigen::Vector3d &, SDL_Renderer* r);
 
         void move_camera_x(const double &);
         void move_camera_y(const double &);
@@ -95,6 +101,8 @@ class Scene {
         const Eigen::Vector3d background_color(const Eigen::Vector3d &) const;
 
         void create() const;
+
+        ~Scene();
 };
 
 

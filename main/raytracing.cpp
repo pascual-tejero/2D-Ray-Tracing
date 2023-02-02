@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
     std::array<Square, 1> squares_scene = {square1};
 
     // Create scene
-    Scene scene(aspect_ratio, image_width, image_height, viewport_height, viewport_width, camera_origin, focal_length, circles_scene, squares_scene, renderer);
+    Scene scene(aspect_ratio, image_width, image_height, viewport_height, viewport_width, camera_origin, focal_length, renderer);
 
     scene.create();
     SDL_RenderPresent(renderer);
