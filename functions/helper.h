@@ -14,63 +14,91 @@ enum class GeometricBodyType{
 
 };
 
-class Circle {
+class GeometricBody {
+    public:
+        virtual bool hit(const Eigen::Vector3d &, const Eigen::Vector3d &) const = 0;
+
+        
+};
+
+class Circle : public GeometricBody {
     private:
         const double _radius;
         Eigen::Vector3d _center;
         const Eigen::Vector3d _color;
-        GeometricBodyType _type;
+        const GeometricBodyType _type;
         
     public:
-        Circle(const double circle_radius, Eigen::Vector3d circle_center, Eigen::Vector3d circle_color, GeometricBodyType type);
+        Circle(const double &, const Eigen::Vector3d &, const Eigen::Vector3d &, const GeometricBodyType &);
 
-        bool hit(const Eigen::Vector3d &vray_orig, const Eigen::Vector3d &ray_dir, const Eigen::Vector3d &circle_cent, const double &circle_rad);
+        bool hit(const Eigen::Vector3d &, const Eigen::Vector3d &) const override;
 
         const double get_radius() const;
 
-        Eigen::Vector3d get_center() const;
+        const Eigen::Vector3d get_center() const;
 
-        Eigen::Vector3d get_color() const;
+        const Eigen::Vector3d get_color() const;
 
 };
+
+class Square : public GeometricBody {
+    private:
+        const double _side;
+        Eigen::Vector3d _center;
+        const Eigen::Vector3d _color;
+        const GeometricBodyType _type;  
+
+    public:
+        Square(const double &, const Eigen::Vector3d &, const Eigen::Vector3d &, const GeometricBodyType &);
+
+        bool hit(const Eigen::Vector3d &, const Eigen::Vector3d &) const override;
+
+        const double get_side() const;
+
+        const Eigen::Vector3d get_center() const;
+
+        const Eigen::Vector3d get_color() const;
+
+};  
+
 
 class Scene {
     private:
         // Image
         const double _aspect_ratio;
-        unsigned int _image_width;
-        unsigned int _image_height;
+        const  unsigned int _image_width;
+        const unsigned int _image_height;
 
         // Camera
-        double _viewport_height;
-        double _viewport_width;
+        const double _viewport_height;
+        const double _viewport_width;
 
         // Define some objects for the scene
         Eigen::Vector3d _camera_origin;
-        Eigen::Vector3d _focal_length;
+        const Eigen::Vector3d _focal_length;
         Eigen::Vector3d _horizontal;
         Eigen::Vector3d _vertical;
         Eigen::Vector3d _lower_left_corner;
-        Eigen::Vector3d _ray_origin;
 
     public:
-        std::vector<Circle> _circles_scene;
+        std::array<Circle, 2> _circles_scene;
+        std::array<Square, 1> _squares_scene;
         SDL_Renderer* _renderer;
 
-        Scene(double, unsigned int, unsigned int, double, double, Eigen::Vector3d, Eigen::Vector3d, std::vector<Circle>, SDL_Renderer*);
+        Scene(const double &, const unsigned int &, const unsigned int &, const double &, const double &, const Eigen::Vector3d &, 
+            const Eigen::Vector3d &, const std::array<Circle, 2> &, const std::array<Square, 1> &, SDL_Renderer* r);
 
-        void move_camera_x(double);
-        void move_camera_y(double);
-        void move_camera_z(double);
+        void move_camera_x(const double &);
+        void move_camera_y(const double &);
+        void move_camera_z(const double &);
 
+        const Eigen::Vector3d background_color(const Eigen::Vector3d &) const;
 
-        Eigen::Vector3d background_color(Eigen::Vector3d&);
-
-        void create();
+        void create() const;
 };
 
 
 // TODO: declare as inline if function call is overhead
-void Logger(std::vector<std::string> duration_str, std::string max_fps);
+void Logger(const std::vector<std::string> &duration_str, const std::string &max_fps);
 
 #endif

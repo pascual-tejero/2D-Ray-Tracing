@@ -6,20 +6,18 @@
 #include "SDL2/SDL.h"
 #include "helper.h"
 
-// IDEA: to change the FOV we could change the focal distance and/or camera origin. 
-// IDEA: Add another 2D geometric bodies with math equations in 2D to the scene.
 
 int main(int argc, char *argv[]) {
 
     // Image
     const auto aspect_ratio = 1.0;
-    const unsigned int image_width = 800;
+    const unsigned int image_width = 400;
     const unsigned int image_height = static_cast<int>(image_width / aspect_ratio);
-    auto viewport_height = 2.0;
-    auto viewport_width = aspect_ratio * viewport_height;
+    const auto viewport_height = 2.0;
+    const auto viewport_width = aspect_ratio * viewport_height;
 
-    Eigen::Vector3d camera_origin(0.0, 0.0, 0.0);
-    Eigen::Vector3d focal_length(0.0, 0.0, 1.0);
+    const Eigen::Vector3d camera_origin(0.0, 0.0, 0.0);
+    const Eigen::Vector3d focal_length(0.0, 0.0, 1.0);
 
     // Create SDL window and SDL renderer
     SDL_Window *window;
@@ -41,20 +39,28 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // Initialize the circle and camera positions
+    // Initialize the circles
     Eigen::Vector3d circle1_center(0.0, 0.0, 1.0);
-    Eigen::Vector3d circle1_color(250, 118, 112);
+    const Eigen::Vector3d circle1_color(250, 118, 112);
 
     Eigen::Vector3d circle2_center(0.5, 0.5, 1.0);
-    Eigen::Vector3d circle2_color(255, 128, 0); 
+    const Eigen::Vector3d circle2_color(255, 128, 0); 
 
     Circle circle1(0.1, circle1_center, circle1_color, GeometricBodyType::circle);
     Circle circle2(0.2, circle2_center, circle2_color, GeometricBodyType::circle);    
 
-    std::vector<Circle> circles_scene = {circle1, circle2};
+    std::array<Circle, 2> circles_scene = {circle1, circle2};
+
+    // Initialize the squares
+    Eigen::Vector3d square1_center(-0.5, 0.5, 1.0);
+    const Eigen::Vector3d square1_color(0, 128, 0);
+
+    Square square1(0.4, square1_center, square1_color, GeometricBodyType::square);
+
+    std::array<Square, 1> squares_scene = {square1};
 
     // Create scene
-    Scene scene(aspect_ratio, image_width, image_height, viewport_height, viewport_width, camera_origin, focal_length, circles_scene, renderer);
+    Scene scene(aspect_ratio, image_width, image_height, viewport_height, viewport_width, camera_origin, focal_length, circles_scene, squares_scene, renderer);
 
     scene.create();
     SDL_RenderPresent(renderer);
@@ -77,16 +83,16 @@ int main(int argc, char *argv[]) {
             if (event.type == SDL_KEYDOWN) { 
                 switch(event.key.keysym.scancode) {
                     case SDL_SCANCODE_LEFT:
-                        scene.move_camera_x(-0.1);
+                        scene.move_camera_x(-0.05);
                         break;
                     case SDL_SCANCODE_RIGHT:
-                        scene.move_camera_x(0.1);
+                        scene.move_camera_x(0.05);
                         break;
                     case SDL_SCANCODE_UP:
-                        scene.move_camera_y(-0.1);
+                        scene.move_camera_y(-0.05);
                         break;
                     case SDL_SCANCODE_DOWN:
-                        scene.move_camera_y(0.1);
+                        scene.move_camera_y(0.05);
                         break;
                     default:
                         break;
@@ -101,10 +107,10 @@ int main(int argc, char *argv[]) {
 
             else if (event.type == SDL_MOUSEWHEEL){
                 if(event.wheel.y > 0){  // scroll up
-                    scene.move_camera_z(0.1);
+                    scene.move_camera_z(0.05);
                 } 
                 else{
-                    scene.move_camera_z(-0.1);
+                    scene.move_camera_z(-0.05);
                 }  
             }
 
@@ -114,10 +120,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
         }
-        // update the position of the circle and/or camera, depending on the game logic
-        circle1_center(0) += 0.01;
-        circle2_center(0) += 0.01;
-
+        
 
         // Clear the renderer
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
@@ -138,8 +141,8 @@ int main(int argc, char *argv[]) {
     }
 
     // Get maximum framerate
-    auto max_time = *std::max_element(time_per_frame.begin(), time_per_frame.end());
-    auto max_fps = 1.0/(max_time*0.001);  // conversion to seconds
+    const auto max_time = *std::max_element(time_per_frame.begin(), time_per_frame.end());
+    const auto max_fps = 1.0/(max_time*0.001);  // conversion to seconds
 
     //Log maximum framerate 
     Logger(duration_str, std::to_string(max_fps));
