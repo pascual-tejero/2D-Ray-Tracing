@@ -1,4 +1,5 @@
 #include <fstream>
+#include <filesystem>
 #include <Eigen/Dense>
 #include "SDL2/SDL.h"
 #include "helper.h"
@@ -130,7 +131,7 @@ void Scene::create() const{
 
 // Save all the output in a buffer object and only write it in the .log file at the very end. 
 void Logger(const std::vector<double> &duration_str, const std::string &max_fps){
-    const std::string filepath = "time_stamp.log";  // run code from base directory
+    const std::string filepath = static_cast<std::string>(std::filesystem::current_path()) + "/../../time_stamp.log";  // run code from base directory
     int frame_number = 0;
     std::ofstream ofs(filepath.c_str(), std::ios_base::out | std::ios_base::trunc);
     for (auto duration : duration_str) {
