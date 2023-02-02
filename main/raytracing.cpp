@@ -39,26 +39,6 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // Initialize the circles
-    Eigen::Vector3d circle1_center(0.0, 0.0, 1.0);
-    const Eigen::Vector3d circle1_color(250, 118, 112);
-
-    Eigen::Vector3d circle2_center(0.5, 0.5, 1.0);
-    const Eigen::Vector3d circle2_color(255, 128, 0); 
-
-    Circle circle1(0.1, circle1_center, circle1_color, GeometricBodyType::circle);
-    Circle circle2(0.2, circle2_center, circle2_color, GeometricBodyType::circle);    
-
-    std::array<Circle, 2> circles_scene = {circle1, circle2};
-
-    // Initialize the squares
-    Eigen::Vector3d square1_center(-0.5, 0.5, 1.0);
-    const Eigen::Vector3d square1_color(0, 128, 0);
-
-    Square square1(0.4, square1_center, square1_color, GeometricBodyType::square);
-
-    std::array<Square, 1> squares_scene = {square1};
-
     // Create scene
     Scene scene(aspect_ratio, image_width, image_height, viewport_height, viewport_width, camera_origin, focal_length, renderer);
 
