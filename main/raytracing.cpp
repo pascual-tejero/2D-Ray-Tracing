@@ -133,7 +133,7 @@ int main(int argc, char *argv[]) {
         // Stop the chrono 
         auto end = std::chrono::system_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-        duration_str.push_back(std::to_string(duration.count()));
+        // duration_str.push_back(std::to_string(duration.count()));
         time_per_frame.push_back(duration.count());
 
         // Limit the frame rate by waiting for the desired time
@@ -145,7 +145,8 @@ int main(int argc, char *argv[]) {
     const auto max_fps = 1.0/(max_time*0.001);  // conversion to seconds
 
     //Log maximum framerate 
-    Logger(duration_str, std::to_string(max_fps));
+    // Logger(duration_str, std::to_string(max_fps));
+    Logger(time_per_frame, std::to_string(max_fps));
     
     // Clean up and exit
     SDL_DestroyRenderer(renderer);

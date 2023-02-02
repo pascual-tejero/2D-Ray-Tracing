@@ -129,12 +129,12 @@ void Scene::create() const{
 }
 
 // Save all the output in a buffer object and only write it in the .log file at the very end. 
-void Logger(const std::vector<std::string> &duration_str, const std::string &max_fps){
+void Logger(const std::vector<double> &duration_str, const std::string &max_fps){
     const std::string filepath = "time_stamp.log";  // run code from base directory
     int frame_number = 0;
     std::ofstream ofs(filepath.c_str(), std::ios_base::out | std::ios_base::trunc);
     for (auto duration : duration_str) {
-        ofs << "Frame " << frame_number << ":" << "\t" << duration << " fps" <<'\n';
+        ofs << "Frame " << frame_number << ":" << "\t" << duration << " ms" <<'\n';
         frame_number++;
     }
     ofs << "Maximum FPS:" << "\t" << max_fps << " fps" <<'\n';

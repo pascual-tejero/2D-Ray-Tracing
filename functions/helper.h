@@ -99,6 +99,6 @@ class Scene {
 
 
 // TODO: declare as inline if function call is overhead
-void Logger(const std::vector<std::string> &duration_str, const std::string &max_fps);
+void Logger(const std::vector<double> &duration_str, const std::string &max_fps);
 
 #endif
