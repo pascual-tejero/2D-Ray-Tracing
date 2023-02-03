@@ -130,7 +130,7 @@ void Scene::create() const{
             SDL_RenderDrawPoint(_renderer, i, j);        
             
             // Draw circles
-            /*
+            #pragma omp parallel for
             for (auto &object : objects) {
                 if (object->hit(_camera_origin, ray_direction)){
                     // Makes no sense to have get_color() if attributes are protected. We could access them directly. Or we declare the attributes private.
@@ -138,8 +138,8 @@ void Scene::create() const{
                     SDL_SetRenderDrawColor(_renderer, color(0), color(1), color(2), 255);
                     SDL_RenderDrawPoint(_renderer, i, j);
                 }
-            }*/
-            
+            }
+            /*
             std::for_each(std::execution::par, objects.begin(), objects.end(), [&](auto&& item){
                 if (item->hit(_camera_origin, ray_direction)){
                     // Makes no sense to have get_color() if attributes are protected. We could access them directly. Or we declare the attributes private.
@@ -147,7 +147,7 @@ void Scene::create() const{
                     SDL_SetRenderDrawColor(_renderer, color(0), color(1), color(2), 255);
                     SDL_RenderDrawPoint(_renderer, i, j);
                 }
-            });
+            });*/
 
         }
     }
