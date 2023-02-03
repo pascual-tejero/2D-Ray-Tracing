@@ -48,7 +48,7 @@ In the folder where you cloned the repository, run the following in the terminal
 To optimize the code, we started by profiling the program. We discovered that the bottleneck was in the `void create() const` method of the _Scene_ class. This method is called at the start of the program or when the user moves or zooms the objects, and it updates all pixels in the window. 
 
 To improve the efficiency and performance of the program, we took the following steps:
-1. We declared all necessary variables as `const` to allow for execution at compile-time.
+1. We declared all necessary variables as `const`. Using constant variables can potentially improve optimization in C++ by allowing the compiler to make more aggressive assumptions about the values of variables. 
 2. In the `void create() const` method, we used the `#pragma omp parallel for` directive from the OpenMP library to make the second for loop parallel.
 3. We implemented runtime polymorphism using a base class _GeometricBody_ and derived classes _Circle_ and _Square_. We created objects of these classes using raw pointers and stored them in a vector of _GeometricBody_ objects, rather than having separate vectors for each class. This allowed us to avoid having two separate loops for each class and instead have a single loop that iterates through all _GeometricBody_ objects and updates their positions.
 
