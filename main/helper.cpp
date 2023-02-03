@@ -114,6 +114,7 @@ const Eigen::Vector3d Scene::background_color(const Eigen::Vector3d &ray_directi
 void Scene::create() const{
 
     for (int j = _image_height-1; j >= 0; --j){
+        #pragma omp parallel for
         for (int i = 0; i < _image_width; ++i) {
             const auto u = double(i) / (_image_width-1);
             const auto v = double(j) / (_image_height-1);
@@ -130,7 +131,6 @@ void Scene::create() const{
             SDL_RenderDrawPoint(_renderer, i, j);        
             
             // Draw circles
-            #pragma omp parallel for
             for (auto &object : objects) {
                 if (object->hit(_camera_origin, ray_direction)){
                     // Makes no sense to have get_color() if attributes are protected. We could access them directly. Or we declare the attributes private.
