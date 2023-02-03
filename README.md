@@ -7,11 +7,11 @@ The following project performed as a part of "Advanced Programming" course offer
 2. Tejero Cervera, Pascual
 
 ## Description ##
-We have defined a 2D screen and created two circles and one square on it. To estimate the distance from the objects to the camera, we evaluate the intersection of the ray with the corresponding object. If an intersection exists, we compute the distance between the point of intersection and the camera and display a pixel of a specific color. If no intersection exists, the background color is displayed.
+We have defined a 2D screen and created two circles and one square on it. To estimate the distance from the objects to the camera, we evaluate the intersection of the ray with the corresponding object. If an intersection exists, we compute the distance between the point of intersection and the camera and display a pixel of a specific color. If no intersection exists, the background color is computed.
 
-The user can adjust the origin of the rays using the arrow keys on the keyboard, allowing them to move the objects in four directions. The scene can be zoomed in or out using the mouse scroll wheel. The program terminates and closes the window when the user presses the Enter key.
+The user can adjust the origin of the camera, and therefore the origin of the rays using the arrow keys on the keyboard, creating a sense of movement. The scene can be zoomed in or out using the mouse scroll wheel. The program terminates and closes the window when the user presses the Enter key.
 
-Whenever the user interacts with the scene by moving or zooming the objects, the calculation time per frame is recorded. Upon program termination, a file named _time_stamp.log_ is created, which contains a list of the calculation time per frame at each moment and the maximum number of frames per second (FPS).
+When the program is running, the calculation time per frame is recorded. Upon program termination, a file named _time_stamp.log_ is created, which contains a list of the calculation time per frame at each moment and the maximum number of frames per second (FPS).
 
 <table>
   <tr>
