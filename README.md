@@ -7,9 +7,9 @@ The following project performed as a part of "Advanced Programming" course offer
 2. Tejero Cervera, Pascual
 
 ## Description ##
-We defined a 2D screen and created a small circle. In order to estimate the distance from the circle to the camera, we first evaluated the intersection of the ray with the circle. If such intersection exists, we computed the distance between the point of intersection and the camera, and a red dot is created, otherwise a black dot.
+We defined a 2D screen and created two circles and one square. In order to estimate the distance from the objects to the camera, we first evaluated the intersection of the ray with the corresponding object. If such intersection exists, we computed the distance between the point of intersection and the camera a dot of a certain color is created, otherwise it is the background color .
 
-Addtionallly, the user can adjust the position of the origin of the rays with the arrow keys of the keyboard in such a way that the circle can be moved in four directions. By using the scroll on the mouse, the user can zoom-in or zoom-out the scene. 
+Addtionallly, the user can adjust the position of the origin of the rays with the arrow keys of the keyboard in such a way that the objects can be moved in four directions. By using the scroll on the mouse, the user can zoom-in or zoom-out the scene. And by pressing enter, the user can close the window and finish the program. 
 
 <table>
   <tr>
