@@ -14,18 +14,18 @@ Addtionallly, the user can adjust the position of the origin of the rays with th
 <table>
   <tr>
     <td>
-      <img src="img/neutral_pos.png" alt="Position of the circle in the center" title="Position of the circle in the center">
+      ![neutral_pos](img/neutral_pos.png "General layout")
     </td>
     <td>
-      <img src="img/moved_pos.png" alt="Position of the circle on one side" title="Position of the circle on one side">
+      ![moved_pos](img/moved_pos.png "Object moved")
     </td>
   </tr>
   <tr>
     <td>
-      <img src="img/zoom_in.png" alt="Zoom in into the circle" title="Zoom in into the circle">
+      ![zoom_in](img/zoom_in.png "Zoom in")
     </td>
     <td>
-      <img src="img/zoom_out.png" alt="Zoom out into the circle" title="Zoom out into the circle">
+      ![zoom_out](img/zoom_out.png "Zoom out")
     </td>
   </tr>
 </table>
