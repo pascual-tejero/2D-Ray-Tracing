@@ -45,12 +45,12 @@ In the folder where you cloned the repository, run the following in the terminal
 `./project_raytracing` 
 
 ## Code optimization ##
-To optimize the code, we started by profiling the program. We discovered that the bottleneck was in the `void create() const` method of the _Scene_ class. This method is called at the start of the program or when the user moves or zooms the objects, and it updates all pixels in the window. 
+To optimize the code, we started by profiling the program. We discovered that the bottleneck was in the `Scene::create()` method. This method is called at the start of the program or when the user moves or zooms the objects, and it updates all pixels in the window. 
 
 To improve the efficiency and performance of the program, we took the following steps:
 1. We declared all necessary variables as `const`. Using constant variables can potentially improve optimization in C++ by allowing the compiler to make more aggressive assumptions about the values of variables. 
-2. In the `void create() const` method, we used the `#pragma omp parallel for` directive from the OpenMP library to make the second for loop parallel.
-3. We implemented runtime polymorphism using a base class _GeometricBody_ and derived classes _Circle_ and _Square_. We created objects of these classes using raw pointers and stored them in a vector of _GeometricBody_ objects, rather than having separate vectors for each class. This allowed us to avoid having two separate loops for each class and instead have a single loop that iterates through all _GeometricBody_ objects and updates their positions.
+2. We implemented runtime polymorphism using a base class _GeometricBody_ and derived classes _Circle_ and _Square_. We created objects of these classes using raw pointers and stored them in a vector of _GeometricBody_ objects, rather than having separate vectors for each class. This allowed us to compute the interaction of the object with the rays using a single for loop (and iterating over the base class pointer) instead of using multiple for loops, one for each type of object.
+3. First we tried to parallelise the loop which iterates through the different object to check whether a ray is hitting them or not. We used the `std::for_each` algorithm, but no reduction in the execution time of the `Scene::create()` was observed. Then we tried to parallelise the same loop using the #from the OpenMP library. Nonetheless, we did not observe any time reduction either. Finally we parallelised the inner for-loop which traverses each pixel in a row using again the `#pragma omp parallel for` directive. We did observe a reduction by a factor of two in the execution time of `Scene::create()`.
 
 ## References ##
 [1] Shirley, P., Ray Tracing in one weekend series. Edited by S. Hollasch and T.D. Black. Available at: https://raytracing.github.io/books/RayTracingInOneWeekend.html  
