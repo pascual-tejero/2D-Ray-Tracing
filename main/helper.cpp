@@ -44,8 +44,8 @@ bool Square::hit(const Eigen::Vector3d &cam_orig, const Eigen::Vector3d &ray_dir
     const Eigen::Vector3d ac(cam_orig - ray_dir);
 
     // Compute the intersection point
-    if (fabs(ac(0) - _center(0)) > _side / 2) return false;
-    if (fabs(ac(1) - _center(1)) > _side / 2) return false;
+    if (fabs(ac(0) - _center(0)) > _side / 2 + cam_orig(2)) return false;
+    if (fabs(ac(1) - _center(1)) > _side / 2 + cam_orig(2)) return false;
     // if (fabs(ac(2) - _center(2)) > _side / 2) return false;
     return true;
 }
@@ -83,17 +83,21 @@ Scene::Scene(const double &aspect_ratio, const unsigned int &image_width, const 
     const Eigen::Vector3d square1_color(0, 128, 0);
 
     // Add figures to the objects array that scene will actually use
-    // std::unique_ptr<GeometricBody> circle1 = std::make_unique<Circle>(0.1, circle1_center, circle1_color, GeometricBodyType::circle);
-    // std::unique_ptr<GeometricBody> circle2 = std::make_unique<Circle>(0.2, circle2_center, circle2_color, GeometricBodyType::circle);
-    // std::unique_ptr<GeometricBody> square = std::make_unique<Square>(0.4, square1_center, square1_color, GeometricBodyType::square);
-
     GeometricBody* c1 = new Circle(0.1, circle1_center, circle1_color, GeometricBodyType::circle);
     GeometricBody* c2 = new Circle(0.2, circle2_center, circle2_color, GeometricBodyType::circle);
     GeometricBody* sq = new Square(0.4, square1_center, square1_color, GeometricBodyType::square);
-
+    
     objects.push_back(c1);
     objects.push_back(c2);
     objects.push_back(sq);
+
+    // std::unique_ptr<GeometricBody> c1 = std::make_unique<Circle>(0.1, circle1_center, circle1_color, GeometricBodyType::circle);
+    // std::unique_ptr<GeometricBody> c2 = std::make_unique<Circle>(0.2, circle2_center, circle2_color, GeometricBodyType::circle);
+    // std::unique_ptr<GeometricBody> sq = std::make_unique<Square>(0.4, square1_center, square1_color, GeometricBodyType::square);
+
+    // objects.push_back(c1.get());
+    // objects.push_back(c2.get());
+    // objects.push_back(sq.get());
 }
 
 void Scene::move_camera_x(const double &increment){_camera_origin(0) += increment;}
