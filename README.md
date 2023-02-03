@@ -56,4 +56,5 @@ To improve the efficiency and performance of the program, we took the following 
 [1] Shirley, P., Ray Tracing in one weekend series. Edited by S. Hollasch and T.D. Black. Available at: https://raytracing.github.io/books/RayTracingInOneWeekend.html  
 [2] Eigen. Available at: https://eigen.tuxfamily.org/dox/  
 [3] SDL2/Frontpage - SDL Wiki. Available at: https://wiki.libsdl.org/SDL2/FrontPage  
+[4] OpenMP (Open Multi-Processing) library. Available at: https://www.openmp.org/
  
