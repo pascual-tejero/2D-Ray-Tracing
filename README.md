@@ -14,18 +14,18 @@ Addtionallly, the user can adjust the position of the origin of the rays with th
 <table>
   <tr>
     <td>
-      ![neutral_pos](img/neutral_pos.png "General layout")
+      ![neutral_pos](images/general_layout.png "General layout")
     </td>
     <td>
-      ![moved_pos](img/moved_pos.png "Object moved")
+      ![moved_pos](images/move_objects.png "Object moved")
     </td>
   </tr>
   <tr>
     <td>
-      ![zoom_in](img/zoom_in.png "Zoom in")
+      ![zoom_in](images/zoom_in.png "Zoom in")
     </td>
     <td>
-      ![zoom_out](img/zoom_out.png "Zoom out")
+      ![zoom_out](images/zoom_out.png "Zoom out")
     </td>
   </tr>
 </table>
