@@ -16,18 +16,18 @@ When the program is running, the calculation time per frame is recorded. Upon pr
 <table>
   <tr>
     <td>
-      ![neutral_pos](images/general_layout.png "General layout")
+      ![neutral_pos](images/general_layout.png)
     </td>
     <td>
-      ![moved_pos](images/move_objects.png "Object moved")
+      ![moved_pos](images/move_objects.png)
     </td>
   </tr>
   <tr>
     <td>
-      ![zoom_in](images/zoom_in.png "Zoom in")
+      ![zoom_in](images/zoom_in.png)
     </td>
     <td>
-      ![zoom_out](images/zoom_out.png "Zoom out")
+      ![zoom_out](images/zoom_out.png )
     </td>
   </tr>
 </table>
