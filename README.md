@@ -12,6 +12,10 @@ We have defined a 2D screen and created two circles and one square on it. To est
 The user can adjust the origin of the camera, and therefore the origin of the rays using the arrow keys on the keyboard, creating a sense of movement. The scene can be zoomed in or out using the mouse scroll wheel. The program terminates and closes the window when the user presses the Enter key.
 
 When the program is running, the calculation time per frame is recorded. Upon program termination, a file named _time_stamp.log_ is created, which contains a list of the calculation time per frame at each moment and the maximum number of frames per second (FPS).
+![neutral_pos](images/general_layout.png)
+![moved_pos](images/move_objects.png)
+![zoom_in](images/zoom_in.png)
+![zoom_out](images/zoom_out.png )
 
 <table>
   <tr>
