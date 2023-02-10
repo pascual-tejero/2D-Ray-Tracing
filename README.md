@@ -18,7 +18,7 @@ When the program is running, the calculation time per frame is recorded. Upon pr
 ![zoom_out](images/zoom_out.png )
 
 ## Prerequisites ##
-In order to compile and run the code, it is necessary to download the SDL2 and Eigen libraries into the system. One can simply do that by entering in the terminal:  
+In order to compile and run the code, it is necessary to download the SDL2 and Eigen libraries into the Linux system. One can simply do that by entering in the terminal:  
 `sudo apt-get install libsdl2-dev`  
 `sudo apt install libeigen3-dev`  
 
