@@ -17,25 +17,6 @@ When the program is running, the calculation time per frame is recorded. Upon pr
 ![zoom_in](images/zoom_in.png)
 ![zoom_out](images/zoom_out.png )
 
-<table>
-  <tr>
-    <td>
-      ![neutral_pos](images/general_layout.png)
-    </td>
-    <td>
-      ![moved_pos](images/move_objects.png)
-    </td>
-  </tr>
-  <tr>
-    <td>
-      ![zoom_in](images/zoom_in.png)
-    </td>
-    <td>
-      ![zoom_out](images/zoom_out.png )
-    </td>
-  </tr>
-</table>
-
 ## Prerequisites ##
 In order to compile and run the code, it is necessary to download the SDL2 and Eigen libraries into the system. One can simply do that by entering in the terminal:  
 `sudo apt-get install libsdl2-dev`  
