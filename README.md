@@ -14,7 +14,7 @@ The user can adjust the origin of the camera, and therefore the origin of the ra
 When the program is running, the calculation time per frame is recorded. Upon program termination, a file named _time_stamp.log_ is created, which contains a list of the calculation time per frame at each moment and the maximum number of frames per second (FPS).
 <div>
   <img src="images/general_layout.png" alt="neutral_pos" width="400"/>
-  <img src="images/move_objects.png alt="moved_pos" width="400"/>
+  <img src="images/move_objects.png" alt="moved_pos" width="400"/>
 </div>
 
 <div>
