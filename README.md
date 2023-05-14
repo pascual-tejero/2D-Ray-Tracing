@@ -12,8 +12,15 @@ We have defined a 2D screen and created two circles and one square on it. To est
 The user can adjust the origin of the camera, and therefore the origin of the rays using the arrow keys on the keyboard, creating a sense of movement. The scene can be zoomed in or out using the mouse scroll wheel. The program terminates and closes the window when the user presses the Enter key.
 
 When the program is running, the calculation time per frame is recorded. Upon program termination, a file named _time_stamp.log_ is created, which contains a list of the calculation time per frame at each moment and the maximum number of frames per second (FPS).
-| ![neutral_pos](images/general_layout.png) | ![moved_pos](images/move_objects.png)
-| ![zoom_in](images/zoom_in.png) | ![zoom_out](images/zoom_out.png )
+<div>
+  <img src="images/general_layout.png" alt="neutral_pos" width="400"/>
+  <img src="images/move_objects.png alt="moved_pos" width="400"/>
+</div>
+
+<div>
+  <img src="images/zoom_in.png" alt="zoom_in" width="400"/>
+  <img src="images/zoom_out.png" alt="zoom_out" width="400"/>
+</div>
 
 ## Prerequisites ##
 In order to compile and run the code, it is necessary to download the SDL2 and Eigen libraries into the Linux system. One can simply do that by entering in the terminal:  
